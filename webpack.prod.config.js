@@ -4,7 +4,7 @@ module.exports = {
   mode: 'production',
   entry: {
     'clock': './src/clock.js',
-    'pi': './src/index.js'
+    'pi': './src/pi.js'
   },
   output:{
     filename: '[name].[hash].js',
