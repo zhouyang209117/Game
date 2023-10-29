@@ -22,14 +22,21 @@ module.exports = {
       inject: false,
       filename: 'index_pi.html',
       chunks: ['pi']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/index_ant.html',
+      inject: false,
+      filename: 'index_ant.html',
+      chunks: ['ant']
     })
   ],
   entry: {
     'clock': './src/clock.js',
-    'pi': './src/pi.js'
+    'pi': './src/pi.js',
+    'ant': './src/ant.js'
   },
   output:{
-    filename: '[name].[hash].js',
+    filename: '[name].[fullhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {

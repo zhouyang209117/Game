@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%= htmlWebpackPlugin.tags.headTags %>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        background: #dddddd;
+    }
+    #canvas {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        margin: 20px;
+        background: #ffffff;
+        border: thin solid #aaaaaa;
+    }
+</style>
+<body>
+<table><tr><div>当前步数</div><div id="step"></div></tr></table>
+<canvas id="canvas" width="1500" height="2000">
+</canvas>
+</body>
+<%= htmlWebpackPlugin.tags.bodyTags %>
+</html>
