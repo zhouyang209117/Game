@@ -54,6 +54,7 @@
       <li class="item" onClick="toPath(event,'./index_pi.html')">PI</li>
       <li class="item" onClick="toPath(event,'./index_clock.html')">CLOCK</li>
       <li class="item" onClick="toPath(event,'./index_ant.html')">ANT</li>
+      <li class="item" onClick="toPath(event,'./maze_dfs.html')">迷宫DFS</li>
     </ul>
   </div>
   <div class="content">
@@ -67,7 +68,6 @@
     }
   }
   function toPath(e,url){
-    console.log(e.target.className)
     let li = document.getElementsByClassName('item')
     for(let i=0;i<li.length;i++){
       let tem = li[i].className.split(' ');

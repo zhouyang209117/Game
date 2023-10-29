@@ -28,12 +28,19 @@ module.exports = {
       inject: false,
       filename: 'index_ant.html',
       chunks: ['ant']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/maze_dfs.html',
+      inject: false,
+      filename: 'maze_dfs.html',
+      chunks: ['maze_dfs']
     })
   ],
   entry: {
     'clock': './src/clock.js',
     'pi': './src/pi.js',
-    'ant': './src/ant.js'
+    'ant': './src/ant.js',
+    'maze_dfs': './src/maze/dfs/anim.js'
   },
   output:{
     filename: '[name].[fullhash].js',
