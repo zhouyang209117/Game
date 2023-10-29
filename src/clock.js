@@ -1,6 +1,8 @@
 import './requestNextAnimationFrame.js'
-import {Line} from './clock_line.js'
+import {Line} from './line.js'
 import {Circle} from './circle.js'
+import {Point} from './point.js'
+
 
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext('2d')
@@ -14,10 +16,10 @@ var minute_hand_r = r * 0.6
 var second_hand_r = r * 0.9
 
 
-var second_hand = new Line()
-var minute_hand = new Line()
-var hour_hand = new Line()
-var c = new Circle()
+var second_hand = new Line(new Point(0, 0), new Point(0, 0))
+var minute_hand = new Line(new Point(0, 0), new Point(0, 0))
+var hour_hand = new Line(new Point(0, 0), new Point(0, 0))
+var c = new Circle(new Point(c_x, c_y), r)
 var font_size = 40
 
 function drawText(ctx, text, x, y) {
@@ -41,16 +43,28 @@ function animate() {
     let minute_y = minute_hand_r * Math.sin(angle_minute)
     let hour_x = hour_hand_r * Math.cos(angle_hour)
     let hour_y = hour_hand_r * Math.sin(angle_hour)
-    second_hand.draw(context, c_x, c_y, c_x + second_x, c_y - second_y)
-    minute_hand.draw(context, c_x, c_y, c_x + minute_x, c_y - minute_y)
-    minute_hand.draw(context, c_x, c_y, c_x + hour_x, c_y - hour_y)
-    c.draw(context, c_x, c_y, r)
+    second_hand.p1.x = c_x
+    second_hand.p1.y = c_y
+    second_hand.p2.x = c_x + second_x
+    second_hand.p2.y = c_y - second_y
+    second_hand.draw(context)
+    minute_hand.p1.x = c_x
+    minute_hand.p1.y = c_y
+    minute_hand.p2.x = c_x + minute_x
+    minute_hand.p2.y = c_y - minute_y
+    minute_hand.draw(context)
+    hour_hand.p1.x = c_x
+    hour_hand.p1.y = c_y
+    hour_hand.p2.x = c_x + hour_x
+    hour_hand.p2.y = c_y - hour_y
+    hour_hand.draw(context)
+    c.draw(context)
     for (let i = 0; i < 12; i++) {
-        let c_label = new Circle()
         let angle_label = Math.PI  / 6 * (-i + 3)
         let num_x = r * Math.cos(angle_label)
         let num_y = r * Math.sin(angle_label)
-        c_label.draw(context, c_x + num_x, c_y - num_y, 4)
+        let c_label = new Circle(new Point(c_x + num_x, c_y - num_y), 4)
+        c_label.draw(context)
     }
 
     for (let i = 0; i < 12; i++) {
@@ -61,7 +75,6 @@ function animate() {
         let text_x = text.length
         drawText(context, i == 0 ? "" + 12 : (i) + "", c_x + num_x - font_size * text_x / 2, c_y - num_y + font_size / 2)
     }
-    // drawText(context, "中国", 0, 0 + font_size)
     requestNextAnimationFrame(animate)
 }
 

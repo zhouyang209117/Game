@@ -1,8 +1,12 @@
 
 export class Circle {
-    draw(context, cx, cy, r) {
+    constructor(o, r) {
+        this.o = o
+        this.r = r
+    }
+    draw(context) {
         context.beginPath()
-        context.arc(cx, cy, r, 2 * Math.PI, false)
+        context.arc(this.o.x, this.o.y, this.r, 2 * Math.PI, false)
         context.stroke()
     }
 }
