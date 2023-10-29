@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <style>
+    body{
+      margin:0;
+      padding:0;
+    }
+    .container{
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+
+    }
+    .sidebar{
+      width:150px;
+      height: 100%;
+      background: #083858;
+      color: white;
+      font-size: 14px;
+    }
+    .sidebar ul{
+      padding: 0;
+      margin: 0;
+
+    }
+    .sidebar li{
+      list-style: none;
+      line-height: 50px;
+      cursor: pointer;
+      text-align: left;
+      padding-left: 30px;
+    }
+    .sidebar li:hover,.sidebar .active{
+      color: #F87D42;
+      background: rgba(0,0,0,0.3);
+    }
+    .content{
+      flex: 1;
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="sidebar">
+    <ul>
+      <li class="item" onClick="toPath(event,'./index_pi.html')">PI</li>
+      <li class="item" onClick="toPath(event,'./index_clock.html')">CLOCK</li>
+    </ul>
+  </div>
+  <div class="content">
+  </div>
+</div>
+<script  type="text/javascript">
+  window.onload = function() {
+    let li = document.getElementsByClassName('item')
+    if(li.length){
+      li[0].click();
+    }
+  }
+  function toPath(e,url){
+    console.log(e.target.className)
+    let li = document.getElementsByClassName('item')
+    for(let i=0;i<li.length;i++){
+      let tem = li[i].className.split(' ');
+      let index = tem.indexOf('active');
+      if(index != -1){
+        tem.splice(index,1)
+      }
+      li[i].className = tem.join(' ')
+    }
+    e.target.className = e.target.className+ ' active'
+    let content = document.getElementsByClassName('content')[0]
+    content.innerHTML = ` <iframe src="`+url+`" width="100%" height="100%" frameborder="0"></iframe>`
+  }
+</script>
+</body>
+</html>
